@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#submitForm").hide();
+        $("#text2").hide();
+        $("#updateButton").click(function(){
+            $("#viewForm").hide();
+            $("#text1").hide();
+            $(this).hide();
+            $("#deleteButton").hide();
+            $("#text2").show();
+            $("#submitForm").show();
+        });
+    });
+</script>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+        <span>{{ message }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<br>
+<div class="container text-center">
+    <h2 id="text1">Details of <span style="font-weight: bold;">{{ customer['name'] }}</span></h2>
+    <h2 id="text2">Update Details</h2>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form id="viewForm">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Customer ID</label>
+                    <input type="text" class="form-control" name="cid1" id="cid" aria-describedby="emailHelp" placeholder="9 digit SSN ID" disabled value="{{ customer['cid'] }}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Customer SSN ID</label>
+                  <input type="text" class="form-control" name="ssn1" id="ssn" aria-describedby="emailHelp" placeholder="9 digit SSN ID" disabled value="{{ customer['ssn'] }}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Customer Name</label>
+                  <input type="text" class="form-control" name="name1" id="name" placeholder="Name" disabled value="{{ customer['name'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Age</label>
+                    <input type="text" class="form-control" name="age1" id="age" placeholder="Age" disabled value="{{ customer['age'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Address</label>
+                    <input type="text" class="form-control" name="address1" id="address" placeholder="Address" disabled value="{{ customer['address'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">City</label>
+                    <input type="text" class="form-control" name="city1" id="city" placeholder="City" disabled value="{{ customer['city'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">State</label>
+                    <input type="text" class="form-control" name="state1" id="state" placeholder="State" disabled value="{{ customer['state'] }}">
+                </div>
+                <br>
+            </form>
+            <div class="text-center row">
+                <div class="col-6">
+                    <a href="/deleteCustomer/{{ customer['cid'] }}/delete">
+                        <button class="btn btn-danger" id="deleteButton">Delete Customer</button>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary" id="updateButton">Update Details</button>
+                </div>
+            </div>
+              <!--  DEVIDER  -->
+              <form id="submitForm" action="/updateCustomer/{{ customer['cid'] }}" method="POST">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Customer ID</label>
+                    <input type="text" class="form-control" name="cid" id="cid" aria-describedby="emailHelp" placeholder="9 digit SSN ID" disabled value="{{ customer['cid'] }}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Customer SSN ID</label>
+                  <input type="text" class="form-control" name="ssn" id="ssn" aria-describedby="emailHelp" placeholder="9 digit SSN ID" disabled value="{{ customer['ssn'] }}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Customer Name</label>
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Name" required value="{{ customer['name'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Age</label>
+                    <input type="text" class="form-control" name="age" id="age" placeholder="Age" required value="{{ customer['age'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Address</label>
+                    <input type="text" class="form-control" name="address" id="address" placeholder="Address" required value="{{ customer['address'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">City</label>
+                    <input type="text" class="form-control" name="city" id="city" placeholder="City" required value="{{ customer['city'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">State</label>
+                    <input type="text" class="form-control" name="state" id="state" placeholder="State" required value="{{ customer['state'] }}">
+                </div>
+                <br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg" id="updateButton">Update</button>
+                </div>
+              </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

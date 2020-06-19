@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FedChoice Bank Login</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<style>
+		#loginForm{
+			background-color: white;
+		}
+		#username, #password {
+			-moz-border-radius: 30px;
+			-webkit-border-radius: 30px;
+			border-radius: 30px;
+			height: 50px;
+			text-align: center;
+		}
+		#btns{
+			width: 80%;
+		}
+	</style>
+</head>
+<body style="background-color:rgba(72, 52, 223, 0.726);">
+	<br><br>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+	</div>
+	<br><br>
+	<h1 style="font-weight: bold; font-size: 400%;" class="text-center"><span style="color: rgb(251, 255, 0);">FedChoice</span> <span style="color: white;">Bank</span></h1>
+	
+	<div id="loginForm" class="container shadow-sm p-3 mb-5 rounded" style="width:30%; margin-top:100px;">
+		<div class="row" style="height:50px; margin-top: -15px;">
+			<div class="col" style="background-color: #17202A;color:white; font-size: 1.5rem; padding-top:5px;">
+				Login
+			</div>
+		</div>
+		<div class="row mt-3 text-center">
+			<div class="col">
+				<form method="POST" action="/getin">
+					<br>
+					<div class="form-group">
+						
+						<input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+					</div>
+					<div class="form-group">
+					
+						<input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+					</div>
+					<br>
+					<div class="row text-center">
+						<div class="col-6 text-center">
+							<button id="btns" type="reset" class="btn btn-outline-danger mb-2">Reset</button>
+						</div>
+						<div class="col-6 text-center">
+							<button id="btns" type="submit" class="btn btn-outline-primary mb-2">Login</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+	</div>
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

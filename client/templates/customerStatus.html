@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    // $(document).ready(function(){
+    //     $("#refresh").click(function(){
+    //         window.location.reload(false);
+    //     });
+    // });
+</script>
+{% endblock %}
+
+
+{% block content %}
+<br>
+<h2 class="text-center">Customer Status</h2>
+<br>
+<div class="container text-center" style="overflow: scroll;">
+    {% if (statuses|length) %}
+    <div>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Customer ID</th>
+                <th scope="col">Customer SSN ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">Message</th>
+                <th scope="col">Last Updated</th>
+                <th scope="col">Operations</th>
+                <th scope="col">View Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for status in statuses %}
+                <tr>
+                    <th scope="row">{{ status['cid'] }}</th>
+                    <td>{{ status['ssn'] }}</td>
+                    <td>{{ status['status'] }}</td>
+                    <td>{{ status['message'] }}</td>
+                    <td>{{ status['timestamp'] }}</td>
+                    <td><a href="/viewCustomerStatus"><button class="btn btn-outline-primary">Refresh</button></a></td>
+                    <td><a href="/customer/{{ status['cid'] }}"><button class="btn btn-outline-info">View</button></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <h2>No Customer Status available yet</h2>
+    {% endif %}
+</div>
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

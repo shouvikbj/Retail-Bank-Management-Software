@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#cid").on("input", function(){
+            if($("#cid").val().length < 9){
+                $("#error").text("Customer ID must 9 characters long");
+            }
+            else{
+                $("#error").text("");
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+        <span>{{ message }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<br>
+<div class="container text-center">
+    <h2>Create New Account for a Customer</h2>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form action="/createNewAccount" method="POST">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Customer ID</label>
+                  <input type="text" class="form-control" name="cid" id="cid" aria-describedby="emailHelp" placeholder="Customer ID" required>
+                  <p id="error" style="color: red; font-size: 15px;"></p>
+                </div>
+                <div class="form-group">
+                    <label for="field">Account Type</label>
+                    <select name="type" class="custom-select" id="field">
+                        <option value="0" selected>Select Account Type...</option>
+                        <option value="Savings Account">Savings Account</option>
+                        <option value="Current Account">Current Account</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Diposit Amount</label>
+                  <input type="text" class="form-control" name="amount" id="amount" placeholder="Amount" required>
+                </div>
+                <br>
+                <div class="text-center row">
+                    <div class="col-6">
+                        <button type="reset" class="btn btn-danger btn-block">Reset</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary btn-block">Submit Details</button>
+                    </div>
+                </div>
+              </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

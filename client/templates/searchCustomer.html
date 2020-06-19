@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+        <span>{{ message }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<br><br>
+<div class="container text-center">
+    <h2>Search for Customer</h2>
+</div>
+<br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form action="/searchCustomer" method="post">
+                <div class="container row">
+                    <div class="col-lg-10">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="ssn" id="text_input" placeholder="Enter SSN ID or Customer ID" aria-describedby="basic-addon2">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 text-right">
+                        <button type="submit" class="btn btn-primary">Find Customer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

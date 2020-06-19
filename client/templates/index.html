@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    a{
+        text-decoration: none !important;
+    }
+    #cards{
+        box-shadow: 0px 0px 10px 0px slategray;
+        padding: 30px;
+        -moz-border-radius: 30px;
+        -webkit-border-radius: 30px;
+        border-radius: 30px;
+        color: white;
+        height: fit-conten1;
+        /* background-color: rgba(137, 43, 226, 0.637); */
+        background-image: linear-gradient(to bottom right, #74B9FF, #0A79DF, #4834DF);
+        /* animating the divs */
+        /* animation: shake 8s; */
+        animation-iteration-count: infinite;
+    }
+    /* this is the main part of the animatio */
+    @keyframes shake {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+        <span>{{ message }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+<div class="container-fluid">
+    <p class="text-right">Last Login : <span style="font-weight: bold;">{{ user['timestamp'] }}</span></p>
+</div>
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 text-center">
+            <img class="rounded-circle" style="height: 350px; width: 350px;" src="/images/{{ user['image'] }}" alt="Profile Image">
+        </div>
+        <div class="col-lg-6">
+            <h1 style="font-size: 300%;" class="text-center">Welcome <span style="font-weight: bold;">{{ user['name'] }}</span></h1>
+            <p class="text-center"><span style="font-weight: bold;">Username:</span> {{ user['username'] }}</p>
+            <br>
+            <div class="text-center row">
+                <div class="col-6">
+                    <a href="/addCustomer">
+                        <div class="container" id="cards">
+                            <h1>Create New Customer Details</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a href="/createAccount">
+                        <div class="container" id="cards">
+                            <h1>Create New Account For Existing User</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <br>
+            <div class="text-center row">
+                <div class="col-6">
+                    <a href="/viewCustomerStatus">
+                        <div class="container" id="cards">
+                            <h1>View Customer Status</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a href="/transactionHistory">
+                        <div class="container" id="cards">
+                            <h1>View Transaction History</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <!-- <p class="text-center">Last Login : <span style="font-weight: bold;">{{ user['timestamp'] }}</span></p> -->
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

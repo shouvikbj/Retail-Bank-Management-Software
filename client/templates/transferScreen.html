@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    #formDiv{
+        width: 80%;
+        margin-left: 22%;
+    }
+    #textDiv{
+        padding: 5%;
+        box-shadow: 0px 0px 30px -15px slategray;
+        -moz-border-radius: 30px;
+        -webkit-border-radius: 30px;
+        border-radius: 30px;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+        <span>{{ message }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<br><br>
+<div class="container text-center">
+    <h1 style="font-weight: bold;">Account Details</h1>
+</div>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+            <div id="textDiv" class="container row">
+                <div class="col-lg-6" style="margin-bottom: 50px;">
+                    <h3 style="font-weight: bold;">Sender</h3>
+                    <br>
+                    <h5><span style="font-weight: bold;">Customer Name : </span>{{ data1['name'] }}</h5>
+                    <h5><span style="font-weight: bold;">Customer ID : </span>{{ data1['cid'] }}</h5>
+                    <h5><span style="font-weight: bold;">Account ID : </span>{{ data1['aid'] }}</h5>
+                    <h5><span style="font-weight: bold;">Account Type : </span>{{ data1['type'] }}</h5>
+                    <h5><span style="font-weight: bold;">Balance : </span>{{ data1['amount'] }}</h5>
+                </div>
+                <div class="col-lg-6">
+                    <h3 style="font-weight: bold;">Receiver</h3>
+                    <br>
+                    <h5><span style="font-weight: bold;">Customer Name : </span>{{ data2['name'] }}</h5>
+                    <h5><span style="font-weight: bold;">Customer ID : </span>{{ data2['cid'] }}</h5>
+                    <h5><span style="font-weight: bold;">Account ID : </span>{{ data2['aid'] }}</h5>
+                    <h5><span style="font-weight: bold;">Account Type : </span>{{ data2['type'] }}</h5>
+                    <h5><span style="font-weight: bold;">Balance : </span>{{ data2['amount'] }}</h5>
+                    </div>
+            </div>
+            <br><br><br>
+            <div class="container text-center">
+                <div id="formDiv" class="text-center">
+                    <form action="/transfer/account/{{ data1['aid'] }}/{{ data2['aid'] }}/transfer" method="POST">
+                        <div class="container row">
+                            <div class="col-lg-10">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="amount" id="text_input" placeholder="Enter Amount" aria-describedby="basic-addon2">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 text-right">
+                                <button type="submit" class="btn btn-primary">Transfer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}
